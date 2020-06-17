@@ -209,6 +209,9 @@ class Edalizer:
                         "include_dirs": [
                             os.path.join(rel_root, i) for i in _vpi["include_dirs"]
                         ],
+                        "lib_dirs": [
+                            os.path.join(rel_root, i) for i in _vpi["lib_dirs"]
+                        ],
                         "libs": _vpi["libs"],
                     }
                 )

@@ -504,6 +504,8 @@ class Core:
                 "src_files": files,
                 "inc_files": incfiles,
                 "libs": [str(l) for l in vpi_lib.libs],
+                "include_dirs": [str(d) for d in vpi_lib.include_dirs],
+                "lib_dirs": [str(d) for d in vpi_lib.lib_dirs],
             }
         return vpi
 
@@ -518,7 +520,8 @@ class Core:
                 {
                     "name": k,
                     "src_files": [f.name for f in v["src_files"]],
-                    "include_dirs": utils.unique_dirs(v["inc_files"]),
+                    "include_dirs": utils.unique_dirs(v["inc_files"]) + v["include_dirs"],
+                    "lib_dirs": v["lib_dirs"],
                     "libs": v["libs"],
                 }
             )
@@ -801,6 +804,12 @@ Vpi:
     - name : libs
       type : String
       desc : External libraries to link against
+    - name : include_dirs
+      type : String
+      desc : Directories containing needed include files
+    - name : lib_dirs
+      type : String
+      desc : Directories containing needed libraries
     - name : filesets
       type : String
       desc : Filesets containing files to use when compiling the VPI library
